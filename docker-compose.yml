@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "7070:7070"
+    environment:
+      - TOKEN=WF76VQQ-HQB4P5G-JFJH8DF-CRKDP1M
+    stdin_open: true
+    # tty: true
