@@ -158,7 +158,6 @@ const MovieDetails: React.FC = () => {
       <CarouselComponent
         name="Похожее"
         data={movie.similarMovies}
-        // Component={MovieCardComponent}
         renderSlide={(movie) => (
           <MovieCardComponent key={movie.id} movie={movie} />
         )}
