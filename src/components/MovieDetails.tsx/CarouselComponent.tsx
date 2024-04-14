@@ -8,14 +8,12 @@ const { Title, Paragraph } = Typography;
 interface CarouselComponentProps {
   data: MovieCard[] | MoviePoster[] | MovieReview[];
   name: string;
-  // Component?: React.ElementType;
   renderSlide?: (item: any) => React.ReactNode;
 }
 
 const CarouselComponent: React.FC<CarouselComponentProps> = ({
   name,
   data,
-  // Component,
   renderSlide
 }) => {
   if (!data || data.length === 0) {
