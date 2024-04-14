@@ -1,46 +1,36 @@
-# Getting Started with Create React App
+# Тестовое задание в Авито
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Стек технологий
+* фронтенд фреймворк: React, версия 18;
+* Библиотека компонентов: ant.design;
+* Сборщик: Webpack
+* Пакетный менеджер: npm
 
-In the project directory, you can run:
 
-### `npm start`
+## Запуск проекта в режиме разработчика
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### `TOKEN=<your api token> npm run start`
+Проект доступен по ссылке <http://localhost:7070>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## Также доступна возможность запустьтить проект в Docker
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `docker-compose build && docker-compose up`
 
-### `npm run build`
+## Примеры запросов и ответов
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Запрос на поиск фильмов по названию
+![Поиск_фильма_по_названию](./readme_assets/Поиск_фильма_по_названию.png) 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Запрос на данных о фильме
+![Получение_данных_о_фильме](./readme_assets/Получение_данных_о_фильме.png) 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Запрос на получение отзывов о фильме
+![Получение_отзывов_о_фильме](./readme_assets/Получение_отзывов_о_фильме.png) 
 
-### `npm run eject`
+### Запрос на получение постеров фильма
+![Получение_постеров_фильма](./readme_assets/Получение_постеров_фильма.png) 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Запрос на получение сезонов серила
+![Получение_сезонов_фильма](./readme_assets/Получение_сезонов_сериала.png) 
