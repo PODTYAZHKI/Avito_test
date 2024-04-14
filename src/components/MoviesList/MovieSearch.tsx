@@ -2,24 +2,17 @@ import React, { useState, useEffect } from "react";
 import { AutoComplete, Input, Button } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 
-import FilterField from "./FilterField";
-
-
+import FilterField from "./CountriesFilterField";
 
 const MAX_SEARCH_HISTORY_SIZE = 20;
 
 interface MovieSearchProps {
   handleSearch: (value: string) => void;
-  handleYearChange: (value: string) => void;
-  handleCountryChange: (value: string) => void;
-  handleRatingChange: (value: string) => void;
 }
 
-const MovieSearch: React.FC<MovieSearchProps> = ({ handleSearch, handleYearChange, handleCountryChange, handleRatingChange }) => {
+const MovieSearch: React.FC<MovieSearchProps> = ({ handleSearch }) => {
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
-
-
 
   useEffect(() => {
     const history = JSON.parse(localStorage.getItem("searchHistory") || "[]");
@@ -29,8 +22,6 @@ const MovieSearch: React.FC<MovieSearchProps> = ({ handleSearch, handleYearChang
   useEffect(() => {
     setSuggestions(searchHistory);
   }, [searchHistory]);
-
-
 
   const onSearch = (searchText: string) => {
     if (!searchText) {
@@ -96,15 +87,7 @@ const MovieSearch: React.FC<MovieSearchProps> = ({ handleSearch, handleYearChang
     updateSearchHistory(value);
   };
   return (
-    <div
-      style={{
-        // padding: "0 24px",
-        // display: "flex",
-        // maxWidth: "100vh",
-        // width: "100%",
-        marginBottom: "10px",
-      }}
-    >
+    <>
       <AutoComplete
         style={{ width: "100%" }}
         options={suggestions.map(renderOption)}
@@ -120,10 +103,7 @@ const MovieSearch: React.FC<MovieSearchProps> = ({ handleSearch, handleYearChang
           enterButton
         />
       </AutoComplete>
-      <FilterField name="Год" change={handleYearChange} value='year'/>
-      <FilterField name="Страна" change={handleCountryChange} value='countries.name' />
-      <FilterField name="Рейтинг" change={handleRatingChange} value='ageRating' />
-    </div>
+    </>
   );
 };
 
