@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { getMovieByName } from "../api/MoviesListAPI";
-
-import { Row, Col, Pagination, Spin } from "antd";
-
 import { useSearchParams } from "react-router-dom";
 
 import MovieCardComponent from "../components/MoviesList/MovieCardComponent";
 import MovieSearch from "../components/MoviesList/MovieSearch";
+
+import { getMovieByName } from "../api/MoviesListAPI";
+
 import { MovieCard, QueryParams } from "../interfaces/MovieInterfaces";
+
+import { Row, Col, Pagination, Spin } from "antd";
 
 const MoviesList: React.FC = () => {
   const [movies, setMovies] = useState<MovieCard[]>();
@@ -99,6 +100,7 @@ const MoviesList: React.FC = () => {
   };
 
   const handleCountryChange = (value: string) => {
+    console.log("countrie", value);
     setCountry(value);
   };
 

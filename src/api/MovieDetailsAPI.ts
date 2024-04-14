@@ -27,4 +27,13 @@ export function getMovieById(id: number) {
   
 	return axios.get(link, { headers, params: {movieId: id} });
   }
+
+  export function getReviewById(id: number) {
+	const link = 'https://api.kinopoisk.dev/v1.4/review';
+	const headers = {
+	  'X-API-KEY': process.env.TOKEN
+	};
+  
+	return axios.get(link, { headers, params: {movieId: id} });
+  }
   

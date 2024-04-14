@@ -31,6 +31,9 @@ const App: React.FC = () => {
               flexGrow: 1,
               padding: 24,
               borderRadius: borderRadiusLG,
+              display: 'flex',
+              justifyContent: 'center',
+              flexDirection: 'column'
             }}
           >
             <Routes>

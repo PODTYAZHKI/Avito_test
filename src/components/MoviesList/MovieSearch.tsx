@@ -122,7 +122,7 @@ const MovieSearch: React.FC<MovieSearchProps> = ({ handleSearch, handleYearChang
       </AutoComplete>
       <FilterField name="Год" change={handleYearChange} value='year'/>
       <FilterField name="Страна" change={handleCountryChange} value='countries.name' />
-      <FilterField name="Рейтинг" change={handleRatingChange} value='rating' />
+      <FilterField name="Рейтинг" change={handleRatingChange} value='ageRating' />
     </div>
   );
 };

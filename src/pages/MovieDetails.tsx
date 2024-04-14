@@ -1,32 +1,37 @@
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button, Col, Row } from "antd";
 
 import MovieCardComponent from "../components/MoviesList/MovieCardComponent";
 import CarouselComponent from "../components/MovieDetails.tsx/CarouselComponent";
 import SeasonsComponent from "../components/MovieDetails.tsx/SeasonsComponent";
-
-import { List, Avatar, Typography, Empty } from "antd";
-
+import ReviewComponent from "../components/MovieDetails.tsx/ReviewComponent";
 
 import {
   getMovieById,
   getPostersById,
+  getReviewById,
   getSeasonsById,
 } from "../api/MovieDetailsAPI";
 
-import { useEffect, useState } from "react";
-import { Movie, MoviePerson, Season } from "../interfaces/MovieInterfaces";
+import {
+  Movie,
+  MoviePerson,
+  MovieReview,
+  Season,
+} from "../interfaces/MovieInterfaces";
+
+import { List, Avatar, Typography, Empty } from "antd";
 
 const { Title, Paragraph } = Typography;
-
-
-
 
 const MovieDetails: React.FC = () => {
   const [movie, setMovie] = useState<Movie>();
   const [posters, setPosters] = useState();
   const [seasons, setSeasons] = useState<Season[]>();
   const [visibleCount, setVisibleCount] = useState(10);
+
+  const [reviews, setReviews] = useState<MovieReview[]>();
 
   const { id } = useParams<{ id?: string }>();
   const navigate = useNavigate();
@@ -38,22 +43,25 @@ const MovieDetails: React.FC = () => {
       data.persons = res.data.persons.filter(
         (person: MoviePerson) => person.profession === "актеры"
       );
-      
+
       setMovie(res.data);
       if (data.type === "tv-series") {
-        const seasonsResponse = await getSeasonsById(Number(id)); 
+        const seasonsResponse = await getSeasonsById(Number(id));
         const sortedData = seasonsResponse.data.docs.sort(
           (a: Season, b: Season) => a.number - b.number
         );
-        setSeasons(sortedData); 
+        setSeasons(sortedData);
         console.log("seasons", seasons);
       }
-      
     });
 
     await getPostersById(Number(id)).then((res) => {
       setPosters(res.data.docs);
-      console.log(res.data.docs);
+      console.log("Posters", res.data.docs);
+    });
+    await getReviewById(Number(id)).then((res) => {
+      setReviews(res.data.docs);
+      console.log("Reviews", res.data.docs);
     });
   };
 
@@ -61,7 +69,6 @@ const MovieDetails: React.FC = () => {
     fetchData();
   }, [id]);
   if (!movie) {
-    
     return <div>Загрузка информации о фильме...</div>;
   }
 
@@ -76,10 +83,9 @@ const MovieDetails: React.FC = () => {
 
     return (
       <>
-        {actors.length}
         <List
           itemLayout="horizontal"
-          dataSource={actors.slice(0, visibleCount)} 
+          dataSource={actors.slice(0, visibleCount)}
           renderItem={(actor) => (
             <List.Item>
               <List.Item.Meta
@@ -104,7 +110,6 @@ const MovieDetails: React.FC = () => {
 
   return (
     <>
-
       <Button onClick={() => navigate(-1)} style={{ marginBottom: "5px" }}>
         Назад
       </Button>
@@ -115,10 +120,8 @@ const MovieDetails: React.FC = () => {
             src={movie.poster}
             alt={movie.name}
             style={{
-              
-              
               width: "100%",
-              
+
               objectFit: "cover",
             }}
           />
@@ -143,18 +146,26 @@ const MovieDetails: React.FC = () => {
         </>
       )}
 
+      {reviews && (
+        <CarouselComponent
+          name="Отзывы"
+          data={reviews}
+          renderSlide={(review) => (
+            <ReviewComponent key={review.id} review={review} />
+          )}
+        />
+      )}
       <CarouselComponent
         name="Похожее"
         data={movie.similarMovies}
-        Component={MovieCardComponent}
+        // Component={MovieCardComponent}
+        renderSlide={(movie) => (
+          <MovieCardComponent key={movie.id} movie={movie} />
+        )}
       />
       {posters && <CarouselComponent name="Постеры" data={posters} />}
-
     </>
   );
 };
 
 export default MovieDetails;
-
-
-
