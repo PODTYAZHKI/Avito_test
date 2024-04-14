@@ -16,6 +16,11 @@ export interface MovieCard {
 	id: number;
 	name: string;
 	poster: string;
+	ageRating: number,
+	year: number,
+	countries: [
+		{ name: string }
+	]
 }
 
 export interface MoviePerson {
@@ -47,8 +52,8 @@ export interface QueryParams {
 	currentPage: string;
 	pageSize: string;
 	[key: string]: string;
-  }
-  
+}
+
 
 export interface MoviePoster {
 	movieId: number,
@@ -67,4 +72,4 @@ export interface MovieReview {
 	authorId: number,
 	updatedAt: string,
 	createdAt: string,
-  }
+}
